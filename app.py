@@ -36,15 +36,19 @@ strategies = {
     "neutral": "Mantenha o tom claro, conciso e profissional."
 }
 
-st.title("BRIGHT CHALLENGE \nEmotion-Aware Response Generator")
+st.title("BRIGHT CHALLENGE")
+st.subheader("Emotion-Aware Response Generator")
 
 user_input = st.text_input("Escreva a sua mensagem aqui:")
 
-if user_input:
-    result = classifier(user_input)[0]
-    emotion = result['label']
-    confidence = round(result['score'], 3)
-    strategy = strategies.get(emotion, "Mantenha o tom profissional e neutro.")
-
-    st.write(f"**Tom detectado:** {emotion} (Confiança: {confidence})")
-    st.write(f"**Estratégia sugerida:** {strategy}")
+if st.button("Detectar emoção e sugerir resposta"):
+    if user_input.strip() == "":
+        st.warning("Por favor, escreva uma mensagem para analisar.")
+    else:
+        result = classifier(user_input)[0]
+        emotion = result['label']
+        confidence = round(result['score'], 3)
+        strategy = strategies.get(emotion, "Mantenha um tom profissional e neutro.")
+        
+        st.markdown(f"**Tom detectado:** {emotion} (Confiança: {confidence})")
+        st.markdown(f"**Estratégia sugerida:** {strategy}")
