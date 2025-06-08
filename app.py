@@ -1,10 +1,10 @@
 import streamlit as st
 from transformers import pipeline
 
-# Carregar modelo
+# Select model
 classifier = pipeline("text-classification", model="SamLowe/roberta-base-go_emotions")
 
-# Dicionário de estratégias
+# Response strategies
 strategies = {
     "admiration": "Reconheça a apreciação positivamente.",
     "amusement": "Adote um tom leve e incentive a interação.",
@@ -36,19 +36,22 @@ strategies = {
     "neutral": "Mantenha o tom claro, conciso e profissional."
 }
 
+# Streamlit interface
 st.title("BRIGHT CHALLENGE")
 st.subheader("Emotion-Aware Response Generator")
 
-user_input = st.text_input("Escreva a sua mensagem aqui:")
+# Input from user
+user_input = st.text_input("Write your message:")
 
-if st.button("Detectar emoção e sugerir resposta"):
+# Detect emotion button
+if st.button("Detect emotional tone"):
     if user_input.strip() == "":
-        st.warning("Por favor, escreva uma mensagem para analisar.")
+        st.warning("Write a message")
     else:
         result = classifier(user_input)[0]
         emotion = result['label']
-        confidence = round(result['score'], 3)
-        strategy = strategies.get(emotion, "Mantenha um tom profissional e neutro.")
+        #confidence = round(result['score'], 3)
+        strategy = strategies[emotion]
         
-        st.markdown(f"**Tom detectado:** {emotion} (Confiança: {confidence})")
-        st.markdown(f"**Estratégia sugerida:** {strategy}")
+        st.markdown(f"**Detected tone:** {emotion}")
+        st.markdown(f"**Suggested response strategy:** {strategy}")
