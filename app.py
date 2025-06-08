@@ -36,7 +36,7 @@ strategies = {
     "neutral": "Mantenha o tom claro, conciso e profissional."
 }
 
-st.title("Emotion-Aware Response Generator")
+st.title("BRIGHT CHALLENGE \nEmotion-Aware Response Generator")
 
 user_input = st.text_input("Escreva a sua mensagem aqui:")
 
