@@ -2,7 +2,7 @@ import streamlit as st
 from transformers import pipeline
 
 # Carregar modelo
-classifier = pipeline("text-classification", model="j-hartmann/emotion-english-distilroberta-base")
+classifier = pipeline("text-classification", model="SamLowe/roberta-base-go_emotions")
 
 # Dicionário de estratégias
 strategies = {
